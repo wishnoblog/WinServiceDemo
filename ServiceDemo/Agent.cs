@@ -36,11 +36,6 @@ namespace ServiceDemo
         private readonly DemoProgram _demo;
 
         /// <summary>
-        /// 判斷是否執行中的旗標
-        /// </summary>
-        private bool _isRunning = false;
-
-        /// <summary>
         /// 建構子
         /// </summary>
         public Agent()
@@ -71,7 +66,6 @@ namespace ServiceDemo
         /// </summary>
         protected override void OnStop()
         {
-            _isRunning = false;
             _timer.Stop();
             _logger.Info($"[{id}]服務停止");
         }
@@ -81,25 +75,20 @@ namespace ServiceDemo
             _logger.Info($"[{id}]計時器時間到");
             try
             {
-                if (_isRunning)
-                {
-                    _logger.Info($"[{id}] 偵測到程序正在執行，略過");
-                    return;
-                }
-                _isRunning = true;
                 _timer.Stop();
                 _logger.Info($"[{id}] 暫停計時，新一輪更換新的id");
                 id = Guid.NewGuid();
                 _logger.Info($"新一輪的id = [{id}] ");
                 _demo.Run(id);
                 _logger.Info($"[{id}] 執行完成 重新起動計時器，等待{DefaulltIntervalInSec / 1000}秒");
-                _isRunning = false;
-                _timer.Start();
+                
             }
             catch (Exception ex)
             {
                 _logger.Error($"[{id}]  錯誤代碼 {ex}");
-                _isRunning = false;
+            }
+            finally
+            {
                 _timer.Start();
             }
         }
