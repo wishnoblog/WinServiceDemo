@@ -33,6 +33,7 @@
             // 
             // serviceProcessInstaller1
             // 
+            this.serviceProcessInstaller1.Account = System.ServiceProcess.ServiceAccount.LocalService;
             this.serviceProcessInstaller1.Password = null;
             this.serviceProcessInstaller1.Username = null;
             // 
@@ -41,6 +42,7 @@
             this.DemoProgramRun.Description = "模擬程式循環執行";
             this.DemoProgramRun.DisplayName = "DemoProgramRun";
             this.DemoProgramRun.ServiceName = "DemoProgramRun";
+            this.DemoProgramRun.AfterInstall += new System.Configuration.Install.InstallEventHandler(this.DemoProgramRun_AfterInstall);
             // 
             // ProjectInstaller
             // 

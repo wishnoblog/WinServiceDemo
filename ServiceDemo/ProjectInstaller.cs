@@ -15,5 +15,10 @@ namespace ServiceDemo
         {
             InitializeComponent();
         }
+
+        private void DemoProgramRun_AfterInstall(object sender, InstallEventArgs e)
+        {
+
+        }
     }
 }

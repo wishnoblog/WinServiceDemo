@@ -59,7 +59,7 @@ namespace ServiceDemo
             id = Guid.NewGuid();
             _logger.Info($"服務啟動 id=[{id}]");
             _logger.Info($"[{id}]執行第一次");
-            _demo.Run();
+            _demo.Run(id);
             _logger.Info($"[{id}]執行第一次完成");
             _timer.Elapsed += TimerElapsed;
             _timer.Interval = DefaulltIntervalInSec;
@@ -91,7 +91,7 @@ namespace ServiceDemo
                 _logger.Info($"[{id}] 暫停計時，新一輪更換新的id");
                 id = Guid.NewGuid();
                 _logger.Info($"新一輪的id = [{id}] ");
-                _demo.Run();
+                _demo.Run(id);
                 _logger.Info($"[{id}] 執行完成 重新起動計時器，等待{DefaulltIntervalInSec / 1000}秒");
                 _isRunning = false;
                 _timer.Start();
